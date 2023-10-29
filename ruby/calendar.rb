@@ -15,7 +15,6 @@ end
 def create_blank(input)
   first_day = Date.new(input.year, input.month, 1)
   print "#{' ' * (WDAYS_WIDTH - 2)}" if first_day.wday.zero?
-  print '' if first_day.wday == 1
   print "#{' '.rjust((first_day.wday - 1) * 3)}" if first_day.wday >= 2
 end
 
