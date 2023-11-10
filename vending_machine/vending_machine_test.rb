@@ -8,9 +8,9 @@ MONSTER = Juice.new('モンスター', 230)
 IROHAS = Juice.new('いろはす', 120)
 
 DEFAULT_STOCK = [
-  { name: PEPSI.name, price: PEPSI.price, count: 5 },
-  { name: MONSTER.name, price: MONSTER.price, count: 5 },
-  { name: IROHAS.name, price: IROHAS.price, count: 5 }
+  { juice: PEPSI, count: 5 },
+  { juice: MONSTER, count: 5 },
+  { juice: IROHAS, count: 5 }
 ].freeze
 
 class VendingMachineTest < Minitest::Test
@@ -40,7 +40,7 @@ class VendingMachineTest < Minitest::Test
   def test_vending_machine_processes_orders_correctly
     initial_count = @vending_machine.find_item(PEPSI)[:count]
     initial_deposit = @suica.deposit
-    price = @vending_machine.find_item(PEPSI)[:price]
+    price = @vending_machine.find_item(PEPSI)[:juice].price
     qty = 1
     @vending_machine.process_order(PEPSI, qty, @suica)
     assert_equal(initial_count - qty, @vending_machine.find_item(PEPSI)[:count])

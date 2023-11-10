@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class VendingMachine
+  attr_reader :stock, :sales
+
   def initialize(stock)
     @stock = stock
     @sales = 0
@@ -13,33 +15,28 @@ class VendingMachine
 
   def process_order(order_juice, order_qty, suica)
     order_item = find_item(order_juice)
-    raise '在庫が不足しています' if order_item[:count] < order_qty
-    raise 'チャージ残金が不足しています' if suica.deposit < order_item[:price] * order_qty
+    raise '在庫が不足しています' if order_item.count < order_qty
+    raise 'チャージ残金が不足しています' if suica.deposit < order_item[:juice].price * order_qty
 
     order_item[:count] -= order_qty
-    update_sales(order_item[:price] * order_qty)
-    suica.make_payment(order_item[:price] * order_qty)
+    update_sales(order_item[:juice].price * order_qty)
+    suica.make_payment(order_item[:juice].price * order_qty)
   end
 
-  def stock
-    @stock
-  end
-
-  def sales
-    @sales
-  end
-
-  def find_item(item)
-    @stock.find { |i| i[:name] == item.name }
+  def find_item(juice)
+    @stock.find { |i| i[:juice] == juice }
   end
 
   private
+
   def update_sales(cash)
     @sales += cash
   end
 end
 
 class Suica
+  attr_reader :deposit
+
   DEFAULT_DEPOSIT = 500
 
   def initialize
@@ -51,10 +48,6 @@ class Suica
     raise '100円以上入金してください' if cash < 100
 
     @deposit += cash
-  end
-
-  def deposit
-    @deposit
   end
 
   def make_payment(cash)
@@ -69,16 +62,10 @@ class Suica
 end
 
 class Juice
+  attr_reader :name, :price
+
   def initialize(name, price)
     @name = name
     @price = price
-  end
-
-  def name
-    @name
-  end
-
-  def price
-    @price
   end
 end
