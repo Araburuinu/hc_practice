@@ -1,0 +1,3 @@
+オブジェクト指向について解説する名Zenn記事「[ポケモンで学ぶ！クラスとオブジェクト指向](https://zenn.dev/m_coder/books/oop-learning-with-pokemon/viewer/about)」。Kotlinで書かれているこの記事を、Rubyで書き直しながらオブジェクト指向について勉強してみました。
+
+詳細は[こちらのブログ](https://scrapbox.io/5cenery/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%81%A7%E5%AD%A6%E3%81%B6%EF%BC%81%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%A8%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%8C%87%E5%90%91_(Ruby))に載せています。
